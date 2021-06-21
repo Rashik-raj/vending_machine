@@ -1,0 +1,63 @@
+[
+    {
+        "model": "vendor.account",
+        "pk": 1,
+        "fields": {
+            "balance": 100
+        }
+    },
+    {
+        "model": "vendor.vendor",
+        "pk": 1,
+        "fields": {
+            "name": "coca-cola",
+            "phone": "9876543210",
+            "address": "Sinnamangal",
+            "account": 1,
+            "created_at": "2021-06-21T11:53:57.923Z",
+            "updated_at": "2021-06-21T12:11:14.452Z"
+        }
+    },
+    {
+        "model": "vendor.product",
+        "pk": 1,
+        "fields": {
+            "name": "Coke",
+            "currency": "RS",
+            "price": 20,
+            "stock": 100,
+            "vendor": 1,
+            "image": "product_img/coke.png",
+            "created_at": "2021-06-21T11:53:57.923Z",
+            "updated_at": "2021-06-21T12:11:14.452Z"
+        }
+    },
+    {
+        "model": "vendor.product",
+        "pk": 2,
+        "fields": {
+            "name": "Pepsi",
+            "currency": "RS",
+            "price": 25,
+            "stock": 100,
+            "vendor": 1,
+            "image": "product_img/pepsi.png",
+            "created_at": "2021-06-21T11:53:57.923Z",
+            "updated_at": "2021-06-21T12:11:14.452Z"
+        }
+    },
+    {
+        "model": "vendor.product",
+        "pk": 3,
+        "fields": {
+            "name": "Dew",
+            "currency": "RS",
+            "price": 30,
+            "stock": 100,
+            "vendor": 1,
+            "image": "product_img/dew.png",
+            "created_at": "2021-06-21T11:53:57.923Z",
+            "updated_at": "2021-06-21T12:11:14.452Z"
+        }
+    }
+]
