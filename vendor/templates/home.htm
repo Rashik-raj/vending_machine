@@ -1,0 +1,99 @@
+{% extends 'base.htm' %}
+{% load static %}
+{% block content %}
+<div class="teal lighten-2">
+    <div class="container" style="padding: 100px;">
+        <div class="white" style="padding: 50px">
+            {% if messages %}
+            <div class="row green" style="padding-left: 15px;">
+                <ul class="messages">
+                    <br>
+                    {% for message in messages %}
+
+                    <li{% if message.tags %} class="white-text" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <form class="form" action="{% url 'vendor:home' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>
+                                <label><input name="product" type="radio" value="{{ product.id }}"
+                                        onchange="setProduct(this.value)" />
+                                    <span class="black-text text-darken-2">{{ product.name }}</span>
+                                </label>
+                            </td>
+                            <td>{{product.currency}}. {{product.price}}</td>
+                            <td><img class="responsive-img" src="{% get_media_prefix %}{{product.image}}"
+                                    alt="background" style="width:50px;"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row" style="display: none;">
+                    <div class="input-field col s12">
+                        <input placeholder="Choose Product" name="product" id="product" type="text" class="validate"
+                            required>
+                        <label for="product">Enter Product</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-field col s5">
+                        <input placeholder="Your Name" name="name" id="name" type="text" class="validate" required
+                            value="raj">
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="Enter Quantity" id="quantity" name="quantity" type="number" class="validate"
+                            required value="1">
+                        <label for="quantity">Enter Quantity</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="Enter Cash" id="coin" name="coin" type="number" class="validate" required
+                            value="50">
+                        <label for="coin">Enter Cash</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label><input name="type" type="radio" value="Purchase" onchange="setType(this.value)" />
+                        <span class="black-text text-darken-2">Purchase</span>
+                        <label><input name="type" type="radio" value="Refund" onchange="setType(this.value)" />
+                            <span class="black-text text-darken-2">Refund</span>
+                        </label>
+                </div>
+                <div class="row" style="display: none;">
+                    <div class="input-field col s12">
+                        <input placeholder="Choose Type" name="transaction_type" id="type" type="text" class="validate"
+                            required>
+                        <label for="type">Enter Type</label>
+                    </div>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+    function setProduct(id) {
+        document.getElementById('product').setAttribute('value', id)
+    }
+    function setType(type) {
+        document.getElementById('type').setAttribute('value', type)
+    }
+</script>
+{% endblock %}

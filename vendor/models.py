@@ -69,13 +69,19 @@ class Transaction(DateMixin):
         db_table = 'transaction'
         verbose_name_plural = 'transactions'
         ordering = ['-created_at']
-
+    TRANSACTION_TYPE = [
+        ('Purchase', 'Purchase'),
+        ('Refund', 'Refund'),
+    ]
     name = models.CharField(max_length=30, null=False, blank=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     invoice_number = models.CharField(max_length=8, blank=True)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=5, decimal_places=2, blank=False)
     total_amount = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    change = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    type = models.CharField(max_length=8, choices=TRANSACTION_TYPE, blank=False, null=False)
 
     def save(self, *args, **kwargs):
         ''' On save, create invoice number '''
@@ -83,6 +89,8 @@ class Transaction(DateMixin):
             self.invoice_number = shortuuid.ShortUUID().random(length=8)
         if not self.total_amount:
             self.total_amount = self.product.price * self.quantity
+        if not self.change:
+            self.change = self.amount - self.total_amount
         return super(Transaction, self).save(*args, **kwargs)
 
     def __str__(self):

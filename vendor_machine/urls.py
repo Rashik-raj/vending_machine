@@ -24,6 +24,7 @@ admin.site.index_title = "Welcome to Vender Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('vendor.urls')),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

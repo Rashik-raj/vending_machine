@@ -11,7 +11,7 @@ class AdminProduct(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'stock', 'vendor', 'created_at')
 
 class AdminTransaction(admin.ModelAdmin):
-    list_display = ('id', 'invoice_number', 'total_amount', 'created_at')
+    list_display = ('id', 'invoice_number', 'amount', 'total_amount', 'change', 'type', 'created_at')
 
 # Register your models here.
 admin.site.register(models.Account, AdminAccount)
