@@ -36,10 +36,10 @@
                                     <span class="black-text text-darken-2">{{ product.name }}</span>
                                 </label>
                             </td>
-                            <td>{{product.currency}}. {{product.price}}</td>
-                            <td>{{product.stock}}</td>
+                            <td>{{ product.currency }}. {{ product.price }}</td>
+                            <td>{{ product.stock }}</td>
                             <td><img class="responsive-img" src="{% get_media_prefix %}{{product.image}}"
-                                    alt="background" style="width:50px;"></td>
+                                    alt="{{ product.name }} image" style="width:50px;"></td>
                         </tr>
                         {% endfor %}
                     </tbody>
